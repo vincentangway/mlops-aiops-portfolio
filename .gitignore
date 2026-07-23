@@ -9,3 +9,5 @@ traditional-ml/data/*
 
 genai-rag/docs/*
 !genai-rag/docs/.gitkeep
+
+traditional-ml/local-output/
