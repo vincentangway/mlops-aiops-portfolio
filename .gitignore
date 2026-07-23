@@ -1,0 +1,11 @@
+__pycache__/
+*.pyc
+.ipynb_checkpoints/
+.env
+
+# Raw/large data - keep out of git, lives in S3 instead
+traditional-ml/data/*
+!traditional-ml/data/.gitkeep
+
+genai-rag/docs/*
+!genai-rag/docs/.gitkeep
