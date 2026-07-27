@@ -10,6 +10,7 @@ def main():
     parser.add_argument("--eta", type=float, default=0.2)
     parser.add_argument("--num_round", type=int, default=100)
     parser.add_argument("--objective", type=str, default="binary:logistic")
+    parser.add_argument("--scale_pos_weight", type=float, default=1.0)
 
     parser.add_argument("--train", type=str, default=os.environ["SM_CHANNEL_TRAIN"])
     parser.add_argument("--validation", type=str, default=os.environ["SM_CHANNEL_VALIDATION"])
@@ -25,7 +26,13 @@ def main():
     dtrain = xgb.DMatrix(X_train, label=y_train)
     dval = xgb.DMatrix(X_val, label=y_val)
 
-    params = {"max_depth": args.max_depth, "eta": args.eta, "objective": args.objective, "eval_metric": "auc"}
+    params = {
+        "max_depth": args.max_depth,
+        "eta": args.eta,
+        "objective": args.objective,
+        "eval_metric": "auc",
+        "scale_pos_weight": args.scale_pos_weight,
+    }
     booster = xgb.train(params, dtrain, num_boost_round=args.num_round,
                          evals=[(dval, "validation")])
 
